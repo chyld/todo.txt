@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+/* App Body */
+.app-body {
+  @apply bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen font-sans antialiased;
+}
+
+/* App Container */
+.app-container {
+  @apply max-w-4xl mx-auto px-6 py-12;
+}
+
+/* Header Section */
+.app-header {
+  @apply text-center mb-12;
+}
+
+.app-title {
+  @apply text-5xl font-bold text-slate-800 mb-3 tracking-tight;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* Main Content */
+.app-main {
+  @apply space-y-8;
+}
+
+/* Controls Section */
+.app-controls {
+  @apply flex justify-center;
+}
+
+.control-buttons {
+  @apply flex gap-4;
+}
+
+/* Buttons */
+.btn {
+  @apply px-8 py-3 font-semibold text-sm tracking-wide rounded-xl focus:outline-none focus:ring-4 shadow-lg;
+}
+
+.btn-load {
+  @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white focus:ring-blue-300 border border-blue-600;
+}
+
+.btn-save {
+  @apply bg-gradient-to-r from-emerald-600 to-emerald-700 text-white focus:ring-emerald-300 border border-emerald-600;
+}
+
+/* Content Section */
+.app-content {
+  @apply flex justify-center;
+}
+
+.todo-editor-wrapper {
+  @apply w-full max-w-4xl;
+}
+
+.todo-editor {
+  @apply w-full h-96 p-6 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl resize-y 
+         focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-transparent 
+         font-mono text-sm leading-relaxed text-slate-700 placeholder-slate-400
+         shadow-xl;
+}
+
+/* Footer */
+.app-footer {
+  @apply mt-16 text-center;
+}
+
+.footer-text {
+  @apply text-slate-500 text-sm font-medium;
+}

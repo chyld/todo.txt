@@ -28,7 +28,7 @@ saveBtn.addEventListener('click', async () => {
       body: todoContent.value
     })
     if (response.ok) {
-      alert('Todos saved successfully!')
+      console.log("Write success.")
     } else {
       alert('Failed to save todos')
     }
