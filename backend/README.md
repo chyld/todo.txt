@@ -1,3 +1,8 @@
+Create project:
+```sh
+npm create hono@latest
+```
+
 To install dependencies:
 ```sh
 bun install
