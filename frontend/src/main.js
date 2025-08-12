@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000'
+const API_BASE = '' // use nginx to forward calls to server
 
 const loadBtn = document.getElementById('load-btn')
 const saveBtn = document.getElementById('save-btn')
@@ -6,7 +6,7 @@ const todoContent = document.getElementById('todo-content')
 
 loadBtn.addEventListener('click', async () => {
   try {
-    const response = await fetch(`${API_BASE}/todos`)
+    const response = await fetch(`${API_BASE}/api/todos`)
     if (response.ok) {
       const content = await response.text()
       todoContent.value = content
@@ -20,7 +20,7 @@ loadBtn.addEventListener('click', async () => {
 
 saveBtn.addEventListener('click', async () => {
   try {
-    const response = await fetch(`${API_BASE}/todos`, {
+    const response = await fetch(`${API_BASE}/api/todos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain'
