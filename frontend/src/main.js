@@ -1,0 +1,38 @@
+const API_BASE = 'http://localhost:3000'
+
+const loadBtn = document.getElementById('load-btn')
+const saveBtn = document.getElementById('save-btn')
+const todoContent = document.getElementById('todo-content')
+
+loadBtn.addEventListener('click', async () => {
+  try {
+    const response = await fetch(`${API_BASE}/todos`)
+    if (response.ok) {
+      const content = await response.text()
+      todoContent.value = content
+    } else {
+      alert('Failed to load todos')
+    }
+  } catch (error) {
+    alert('Error loading todos: ' + error.message)
+  }
+})
+
+saveBtn.addEventListener('click', async () => {
+  try {
+    const response = await fetch(`${API_BASE}/todos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: todoContent.value
+    })
+    if (response.ok) {
+      alert('Todos saved successfully!')
+    } else {
+      alert('Failed to save todos')
+    }
+  } catch (error) {
+    alert('Error saving todos: ' + error.message)
+  }
+})

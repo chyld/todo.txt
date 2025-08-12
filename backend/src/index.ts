@@ -1,9 +1,12 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { readFile, writeFile } from 'fs/promises'
 import { join } from 'path'
 
 const app = new Hono()
 const TODO_FILE_PATH = join(process.cwd(), 'data', 'todo.txt')
+
+app.use('/*', cors())
 
 app.get('/todos', async (c) => {
   try {

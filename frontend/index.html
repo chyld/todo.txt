@@ -3,11 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link href="/src/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+       <h1 class="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+      <h1>Todo Manager</h1>
+      <button id="load-btn">Load Todos</button>
+      <button id="save-btn">Save Todos</button>
+      <br><br>
+      <textarea id="todo-content" rows="20" cols="80" placeholder="Your todos will appear here..."></textarea>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
