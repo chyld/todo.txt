@@ -1,53 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link href="/src/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>todo.txt</title>
+    <meta name="description" content="A modern todo.txt editor with line numbers and autosave" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link href="/src/style.css" rel="stylesheet" />
+    <title>todo.txt - Simple Task Management</title>
   </head>
-  <body class="app-body">
-    <div id="app" class="app-container">
+  <body>
+    <div class="app-container">
       <header class="app-header">
-        <h1 class="app-title">todo.txt</h1>
+        <h1 class="app-title">
+          <span class="title-text">todo.txt</span>
+          <div 
+            id="status-led" 
+            class="status-led status-led-title" 
+            role="status"
+            aria-label="Document status"
+            data-status="clean"
+          ></div>
+        </h1>
       </header>
 
-      <main class="app-main">
-        <section class="app-controls">
-          <div class="control-buttons">
-            <button id="load-btn" class="btn btn-load">Load</button>
-            <div class="save-button-group">
-              <button id="save-btn" class="btn btn-save">Save</button>
-              <div id="status-led" class="status-led status-led-clean"></div>
-            </div>
+      <main class="app-main" role="main">
+        <!-- Status and Controls Section -->
+        <section class="controls-section" aria-label="Editor controls">
+          <div class="control-actions">
+            <button 
+              id="load-btn" 
+              class="btn btn-secondary"
+              type="button"
+              aria-describedby="load-help"
+            >
+              <span class="btn-icon">↻</span>
+              <span class="btn-text">Load</span>
+            </button>
+            
+            <button 
+              id="save-btn" 
+              class="btn btn-primary"
+              type="button"
+              aria-describedby="save-help"
+            >
+              <span class="btn-icon">💾</span>
+              <span class="btn-text">Save</span>
+            </button>
           </div>
         </section>
 
-        <section class="app-content">
-          <div class="todo-editor-wrapper">
-            <div class="editor-container">
-              <div class="line-numbers" id="line-numbers"></div>
+        <!-- Editor Section -->
+        <section class="editor-section" aria-label="Todo editor">
+          <div class="editor-wrapper">
+            <div class="editor-container" role="textbox" aria-label="Todo text editor">
+              <div 
+                class="line-numbers" 
+                id="line-numbers"
+                aria-hidden="true"
+                role="presentation"
+              ></div>
               <textarea 
                 id="todo-content" 
-                class="todo-content"
-                rows="20"
-                cols="80"
-                placeholder="Your todos will appear here..."
+                class="editor-textarea"
+                placeholder="Enter your todos here... Press Ctrl+S to save"
+                aria-label="Todo content"
+                spellcheck="false"
+                autocomplete="off"
+                data-dirty="false"
               ></textarea>
             </div>
-            <div class="page-nav-buttons">
-              <button id="page-up-btn" class="page-nav-btn page-up">↑</button>
-              <button id="page-down-btn" class="page-nav-btn page-down">↓</button>
-            </div>
+            
+            <nav class="editor-nav" aria-label="Editor navigation">
+              <button 
+                id="page-up-btn" 
+                class="nav-btn"
+                type="button"
+                aria-label="Scroll up one page"
+                title="Page up"
+              >
+                <span aria-hidden="true">↑</span>
+              </button>
+              <button 
+                id="page-down-btn" 
+                class="nav-btn"
+                type="button"
+                aria-label="Scroll down one page"
+                title="Page down"
+              >
+                <span aria-hidden="true">↓</span>
+              </button>
+            </nav>
+          </div>
+          
+          <!-- Hidden help text for screen readers -->
+          <div class="sr-only">
+            <p id="load-help">Load todos from server</p>
+            <p id="save-help">Save current todos to server</p>
           </div>
         </section>
       </main>
 
       <footer class="app-footer">
-        <p class="footer-text">&copy; 2025 todo.txt</p>
+        <p>&copy; 2025 todo.txt</p>
       </footer>
     </div>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
