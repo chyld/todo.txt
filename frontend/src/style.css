@@ -52,11 +52,13 @@
 }
 
 .btn-load {
-  @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white focus:ring-blue-300 border border-blue-600;
+  background: #219EBC;
+  @apply text-white focus:ring-blue-300 border border-slate-300;
 }
 
 .btn-save {
-  @apply bg-gradient-to-r from-emerald-600 to-emerald-700 text-white focus:ring-emerald-300 border border-emerald-600;
+  background: #219EBC;
+  @apply text-white focus:ring-blue-300 border border-slate-300;
 }
 
 .btn-save-dirty {
@@ -69,7 +71,7 @@
 }
 
 .todo-editor-wrapper {
-  @apply w-full max-w-4xl;
+  @apply w-full max-w-4xl flex items-center gap-4;
 }
 
 .status-led {
@@ -77,18 +79,50 @@
 }
 
 .status-led-clean {
-  @apply bg-emerald-500 shadow-emerald-500/50 shadow-sm;
+  background: #219EBC;
+  @apply shadow-sm;
+  box-shadow: 0 0 4px rgba(33, 158, 188, 0.5);
 }
 
 .status-led-dirty {
-  @apply bg-yellow-500 shadow-yellow-500/50 shadow-sm;
+  background: #FB8500;
+  @apply shadow-sm;
+  box-shadow: 0 0 4px rgba(251, 133, 0, 0.5);
 }
 
-.todo-editor {
-  @apply w-full h-96 p-6 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl resize-y 
-         focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-transparent 
+
+.editor-container {
+  @apply flex-1 h-96 bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl 
+         shadow-xl flex overflow-hidden resize-y;
+}
+
+.line-numbers {
+  @apply bg-slate-100/50 border-r border-slate-200 px-3 py-6 font-mono text-sm leading-relaxed 
+         text-slate-500 select-none min-w-[3rem] text-right whitespace-pre overflow-hidden;
+}
+
+.todo-content {
+  @apply flex-1 p-6 bg-transparent border-none resize-none outline-none 
          font-mono text-sm leading-relaxed text-slate-700 placeholder-slate-400
-         shadow-xl;
+         focus:outline-none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.todo-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+
+.page-nav-buttons {
+  @apply flex flex-col gap-2 items-center justify-center;
+}
+
+.page-nav-btn {
+  @apply w-8 h-8 bg-slate-200/80 hover:bg-slate-300/80 text-slate-600 hover:text-slate-800
+         rounded-lg flex items-center justify-center text-sm font-bold
+         transition-all duration-150 transform hover:scale-105 active:scale-95
+         border border-slate-300/50 shadow-sm;
 }
 
 /* Footer */

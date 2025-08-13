@@ -3,6 +3,9 @@ const API_BASE = '' // use nginx to forward calls to server
 const loadBtn = document.getElementById('load-btn')
 const saveBtn = document.getElementById('save-btn')
 const todoContent = document.getElementById('todo-content')
+const lineNumbers = document.getElementById('line-numbers')
+const pageUpBtn = document.getElementById('page-up-btn')
+const pageDownBtn = document.getElementById('page-down-btn')
 
 // Dirty state tracking
 let originalContent = ''
@@ -12,6 +15,48 @@ function updateDirtyState() {
   const currentContent = todoContent.value
   isDirty = currentContent !== originalContent
   updateUI()
+}
+
+
+function updateLineNumbers() {
+  const content = todoContent.value
+  
+  if (!content.trim()) {
+    // Empty content, show just line 1
+    lineNumbers.textContent = '1'
+    return
+  }
+  
+  // Create a hidden div to measure actual content height
+  const measurer = document.createElement('div')
+  measurer.style.position = 'absolute'
+  measurer.style.visibility = 'hidden'
+  measurer.style.width = todoContent.clientWidth - parseInt(window.getComputedStyle(todoContent).paddingLeft) - parseInt(window.getComputedStyle(todoContent).paddingRight) + 'px'
+  measurer.style.font = window.getComputedStyle(todoContent).font
+  measurer.style.lineHeight = window.getComputedStyle(todoContent).lineHeight
+  measurer.style.whiteSpace = 'pre-wrap'
+  measurer.style.wordWrap = 'break-word'
+  measurer.textContent = content
+  
+  document.body.appendChild(measurer)
+  
+  const contentHeight = measurer.offsetHeight
+  const lineHeight = parseInt(window.getComputedStyle(todoContent).lineHeight)
+  const visualLines = Math.max(1, Math.ceil(contentHeight / lineHeight))
+  
+  document.body.removeChild(measurer)
+  
+  // Generate line numbers for actual visual lines
+  const numbers = []
+  for (let i = 1; i <= visualLines; i++) {
+    numbers.push(i.toString())
+  }
+  
+  lineNumbers.textContent = numbers.join('\n')
+}
+
+function syncScroll() {
+  lineNumbers.scrollTop = todoContent.scrollTop
 }
 
 function updateUI() {
@@ -26,8 +71,34 @@ function updateUI() {
   }
 }
 
-// Add input event listener for dirty state tracking
-todoContent.addEventListener('input', updateDirtyState)
+
+// Add input event listener for dirty state tracking and line numbers
+todoContent.addEventListener('input', () => {
+  updateDirtyState()
+  updateLineNumbers()
+})
+
+// Sync scrolling between textarea and line numbers
+todoContent.addEventListener('scroll', syncScroll)
+
+// Initialize line numbers
+updateLineNumbers()
+
+// Page navigation functionality
+pageUpBtn.addEventListener('click', () => {
+  const pageSize = todoContent.clientHeight
+  todoContent.scrollTop = Math.max(0, todoContent.scrollTop - pageSize)
+  syncScroll()
+})
+
+pageDownBtn.addEventListener('click', () => {
+  const pageSize = todoContent.clientHeight
+  todoContent.scrollTop = Math.min(
+    todoContent.scrollHeight - todoContent.clientHeight,
+    todoContent.scrollTop + pageSize
+  )
+  syncScroll()
+})
 
 loadBtn.addEventListener('click', async () => {
   try {
@@ -38,6 +109,13 @@ loadBtn.addEventListener('click', async () => {
       originalContent = content
       isDirty = false
       updateUI()
+      updateLineNumbers()
+      
+      // Scroll to bottom and place cursor at end
+      todoContent.scrollTop = todoContent.scrollHeight
+      todoContent.focus()
+      todoContent.setSelectionRange(content.length, content.length)
+      syncScroll()
     } else {
       alert('Failed to load todos')
     }
