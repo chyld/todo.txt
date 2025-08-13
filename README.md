@@ -1,23 +1,36 @@
 # todo.txt
 
-## install
+# development
+
+### backend
+
+- bun run dev
+
+### frontend
+
+- npm install
+- npm run dev
+
+# production
+
+### install
 
 - node
 - bun
 - nginx
 
-## backend
+### backend
 
 - bun run prod
 - touch `data/todo.txt`
 
-## frontend
+### frontend
 
 - npm install
 - npm run build
 - copy `dist` to `/var/www/dist`
 
-## nginx
+### nginx
 
 - `sudo nginx -t`
 - `sudo systemctl reload nginx`

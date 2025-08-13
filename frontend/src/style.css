@@ -35,12 +35,20 @@
 }
 
 .control-buttons {
-  @apply flex gap-4;
+  @apply flex gap-4 items-center;
+}
+
+.save-button-group {
+  @apply flex items-center gap-3;
 }
 
 /* Buttons */
 .btn {
-  @apply px-8 py-3 font-semibold text-sm tracking-wide rounded-xl focus:outline-none focus:ring-4 shadow-lg;
+  @apply px-8 py-3 font-semibold text-sm tracking-wide rounded-xl focus:outline-none focus:ring-4 shadow-lg transition-all duration-150 transform;
+}
+
+.btn:active {
+  @apply scale-95 shadow-md;
 }
 
 .btn-load {
@@ -51,6 +59,10 @@
   @apply bg-gradient-to-r from-emerald-600 to-emerald-700 text-white focus:ring-emerald-300 border border-emerald-600;
 }
 
+.btn-save-dirty {
+  @apply bg-gradient-to-r from-orange-500 to-orange-600 text-white focus:ring-orange-300 border border-orange-500;
+}
+
 /* Content Section */
 .app-content {
   @apply flex justify-center;
@@ -58,6 +70,18 @@
 
 .todo-editor-wrapper {
   @apply w-full max-w-4xl;
+}
+
+.status-led {
+  @apply w-3 h-3 rounded-full border-2 border-slate-300;
+}
+
+.status-led-clean {
+  @apply bg-emerald-500 shadow-emerald-500/50 shadow-sm;
+}
+
+.status-led-dirty {
+  @apply bg-yellow-500 shadow-yellow-500/50 shadow-sm;
 }
 
 .todo-editor {
